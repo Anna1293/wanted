@@ -1,0 +1,10 @@
+databaseChangeLog:
+
+  #BASE
+  - include: { relativeToChangelogFile: true, file: changesets/hp_person_generic/2024_10_12_create_hp_person_generic.yaml }
+
+  - include: { relativeToChangelogFile: true, file: changesets/hp_person_generic/2024_10_12_load_hp_person_generic_data.yaml }
+
+  - include: { relativeToChangelogFile: true, file: changesets/hp_person_dependant/2024_10_12_create_hp_person_dependant.yaml }
+
+  - include: { relativeToChangelogFile: true, file: changesets/hp_person_dependant/2024_10_12_load_hp_person_dependant_data.yaml }

@@ -1,0 +1,75 @@
+databaseChangeLog:
+
+  #Table
+  - changeSet:
+      id: 153762-create-hp-person-generic
+      author: Anna Kudraeva
+      changes:
+        - createTable:
+            tableName: hp_person_generic
+            schemaName: public
+            remarks: 'Персональные данные сотрудников и их родственников'
+
+            columns:
+              - column: { name: sys_id, type: bigint, remarks: 'Системный идентификатор' }
+              - column: { name: person_id, type: varchar, remarks: 'Идентификатор персоны' }
+              - column: { name: sys_version, type: bigint, remarks: 'Версия системы' }
+              - column: { name: photo_fk_sys_id, type: bigint, remarks: '' }
+              - column: { name: sys_extension, type: varchar, remarks: 'Системное расширение' }
+              - column: { name: salutation, type: varchar, remarks: 'Приветствие' }
+              - column: { name: family_name, type: varchar, remarks: 'Фамилия' }
+              - column: { name: given_name, type: varchar, remarks: 'Собственное имя' }
+              - column: { name: middle_name, type: varchar, remarks: 'Отчество' }
+              - column: { name: name, type: varchar, remarks: 'Имя' }
+              - column: { name: name_translation_sys_id, type: bigint, remarks: 'Идентификатор системы имен' }
+              - column: { name: alt_family_name, type: varchar, remarks: 'Альтернативная фамилия' }
+              - column: { name: alt_given_name, type: varchar, remarks: 'Альтернативное имя' }
+              - column: { name: alt_middle_name, type: varchar, remarks: 'Альтернативное отчество' }
+              - column: { name: birth_date, type: timestamptz, remarks: 'Дата рождения' }
+              - column: { name: gender, type: varchar, remarks: 'пол' }
+              - column: { name: marital_status, type: varchar, remarks: 'Семейное положение' }
+              - column: { name: primary_language, type: varchar, remarks: 'Основной язык' }
+              - column: { name: citizenship, type: varchar, remarks: 'Гражданство' }
+              - column: { name: residence, type: varchar, remarks: 'место проживания' }
+              - column: { name: ethnicity, type: varchar, remarks: 'Этническая принадлежность' }
+              - column: { name: religion, type: varchar, remarks: 'Религия' }
+              - column: { name: sys_tenant, type: varchar, remarks: '' }
+              - column: { name: created_by, type: varchar, remarks: 'Автор записи' }
+              - column: { name: creation_time, type: timestamptz, remarks: 'Время создания записи' }
+              - column: { name: sys_change_user, type: varchar, remarks: 'Системное изменение пользователя' }
+              - column: { name: sys_change_time, type: varchar, remarks: 'Системное изменение времени' }
+              - column: { name: sys_parent_id, type: bigint, remarks: 'Системные родительский идентификатор' }
+              - column: { name: sys_date_to, type: timestamptz, remarks: 'Системная дата до' }
+              - column: { name: sys_date_from, type: timestamptz, remarks: 'Системная дата после' }
+
+  #Constraints
+  - changeSet:
+      id: 153762-create-hp-person-generic-constraints
+      author: Anna Kudraeva
+      changes:
+        - addPrimaryKey:
+            columnNames: sys_id
+            tableName: hp_person_generic
+            schemaName: public
+
+  #Indexes
+  - changeSet:
+      id: 153762-create-hp-person-generic-indexes
+      author: Anna Kudraeva
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: sys_id
+                  type: bigint
+            indexName: sys_idx
+            schemaName: public
+            tableName: hp_person_generic
+        - createIndex:
+            columns:
+              - column:
+                  name: person_id
+                  type: varchar
+            indexName: person_idx
+            schemaName: public
+            tableName: hp_person_generic

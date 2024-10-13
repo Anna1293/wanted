@@ -1,0 +1,15 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 822185-load_hp_person_dependant_data
+      author: Anna Kudraeva
+      context: test_data
+      changes:
+        - loadUpdateData:
+            encoding: UTF-8
+            quotchar: '"'
+            relativeToChangelogFile: true
+            file: 2024_10_12_hp_person_dependant.csv
+            primaryKey: sys_id
+            schemaName: public
+            tableName: hp_person_dependant

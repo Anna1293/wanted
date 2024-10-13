@@ -1,0 +1,76 @@
+databaseChangeLog:
+
+  #Table
+  - changeSet:
+      id: 816867-create-hp-person-dependant
+      author: Anna Kudraeva
+      changes:
+        - createTable:
+            tableName: hp_person_dependant
+            schemaName: public
+            remarks: 'Родственные связи'
+
+            columns:
+              - column: { name: sys_id, type: bigint, remarks: 'Системный идентификатор' }
+              - column: { name: sys_version, type: bigint, remarks: 'Версия системы' }
+              - column: { name: hp_person_generic_sys_id, type: bigint, remarks: 'Общий системный идентификатор' }
+              - column: { name: hp_related_person_sys_id, type: bigint, remarks: 'Системный идентификатор связанного лица' }
+              - column: { name: attachment_fk_sys_id, type: bigint, remarks: 'Вложенный ключ системы' }
+              - column: { name: contact_relationship, type: varchar, remarks: 'Контакты' }
+              - column: { name: id, type: bigint, remarks: 'Идентификатор' }
+              - column: { name: sys_tenant, type: varchar, remarks: '' }
+              - column: { name: created_by, type: varchar, remarks: 'Автор записи' }
+              - column: { name: creation_time, type: timestamptz, remarks: 'Время создания записи' }
+              - column: { name: sys_change_user, type: varchar, remarks: 'Системное изменение пользователя' }
+              - column: { name: sys_change_time, type: varchar, remarks: 'Системное изменение времени' }
+              - column: { name: sys_parent_id, type: bigint, remarks: 'Системные родительский идентификатор' }
+              - column: { name: sys_date_to, type: timestamptz, remarks: 'Системная дата до' }
+              - column: { name: sys_date_from, type: timestamptz, remarks: 'Системная дата после' }
+
+  #Constraints
+  - changeSet:
+      id: 816867-create-hp-person-dependant-constraints
+      author: Anna Kudraeva
+      changes:
+        - addPrimaryKey:
+            columnNames: sys_id
+            tableName: hp_person_dependant
+            schemaName: public
+        - addForeignKeyConstraint:
+            constraintName: fk_hp_person_generic_sys_id
+            baseTableSchemaName: public
+            baseTableName: hp_person_dependant
+            baseColumnNames: hp_person_generic_sys_id
+            referencedTableSchemaName: public
+            referencedTableName: hp_person_generic
+            referencedColumnNames: sys_id
+        - addForeignKeyConstraint:
+            constraintName: fk_hp_related_person_sys_id
+            baseTableSchemaName: public
+            baseTableName: hp_person_dependant
+            baseColumnNames: hp_related_person_sys_id
+            referencedTableSchemaName: public
+            referencedTableName: hp_person_generic
+            referencedColumnNames: sys_id
+
+  #Indexes
+  - changeSet:
+      id: 153762-create-hp-person-generic-indexes
+      author: Anna Kudraeva
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: hp_person_generic_sys_id
+                  type: bigint
+            indexName: hp_person_generic_sys_idx
+            schemaName: public
+            tableName: hp_person_dependant
+        - createIndex:
+            columns:
+              - column:
+                  name: hp_related_person_sys_id
+                  type: bigint
+            indexName: hp_related_person_sys_idx
+            schemaName: public
+            tableName: hp_person_dependant
